@@ -1,0 +1,37 @@
+<div>
+  <input type="text" [(ngModel)]="filterText" (keyup)="applyFilter()" placeholder="Search here..." />
+
+  <div>
+    <label *ngFor="let column of columns">
+      <input type="checkbox" [(ngModel)]="column.visible" (change)="toggleColumnVisibility(column)" /> {{ column.name}}
+    </label>
+  </div>
+
+  <table>
+    <thead>
+    <tr>
+      <th></th>
+      <th *ngFor="let column of displayedColumns" (click)="sortTable(column.field)">
+        {{ column.name }}
+        <span *ngIf="sortColumn === column.field">{{ sortOrder === 'asc' ? '▲' : '▼' }}</span>
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let row of paginatedData">
+<!--      <td></td>-->
+<!--      <td *ngFor="let column of displayedColumns">{{ row[column.field] }}</td>-->
+      <td *ngFor="let column of displayedColumns">
+        <span *ngIf="column.field === 'name'">{{ row.name.first }} {{ row.name.last }}</span>
+        <span *ngIf="column.field !== 'name'">{{ row[column.field] }}</span>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div>
+    <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+    <span>Page {{ currentPage }} of {{ totalPages }}</span>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+  </div>
+</div>

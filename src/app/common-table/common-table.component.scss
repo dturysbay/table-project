@@ -1,0 +1,21 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+
+th {
+  cursor: pointer;
+}
+
+input[type="checkbox"] {
+  margin-right: 4px;
+}
+
+.pagination {
+  margin-top: 10px;
+}
